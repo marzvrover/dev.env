@@ -5,9 +5,11 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-if [ -z "$PRIVATE_ENV_ACCESS" ]
+ENV_ACCESS_TOKEN_NAME="ENV_${1^^}_ACCESS_TOKEN"
+
+if [ -z "${!ENV_ACCESS_TOKEN_NAME}" ]
 then
-    echo "Cannot add $1.env because PRIVATE_ENV_ACCESS is not set"
+    echo "Cannot add $1.env because $ENV_ACCESS_TOKEN_NAME is not set"
     exit 1
 fi
 
