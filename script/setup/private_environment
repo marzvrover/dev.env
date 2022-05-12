@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$1" ]; then
+  echo "Usage: $0 <environment>"
+  exit 1
+fi
+
 if [ -z "$PRIVATE_ENV_ACCESS" ]
 then
     echo "Cannot add $1.env because PRIVATE_ENV_ACCESS is not set"
