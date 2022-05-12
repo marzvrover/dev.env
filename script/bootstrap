@@ -2,7 +2,7 @@
 
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
 
-$SOURCE_DIR/git
+$SOURCE_DIR/setup/git
 
 private_environments=(
     "github"
