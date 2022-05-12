@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SOURCE_DIR="$(dirname "$(realpath "$0")")"
+
+private_environments=(
+    "github"
+)
+
+for private_environment in ${private_environments[@]}
+do
+  $SOURCE_DIR/setup/private_environment "$private_environment"
+done

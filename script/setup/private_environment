@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SOURCE_DIR="$(dirname "$(realpath "$0")")"
+
+mkdir $SOURCE_DIR/private_environments
+cd $SOURCE_DIR/private_environments
+git clone "https://marzvrover:$GITHUB_TOKEN@github.com/marzvrover/$1.env.git"
