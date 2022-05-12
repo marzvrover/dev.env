@@ -2,6 +2,14 @@
 
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
 
-mkdir $SOURCE_DIR/private_environments
+mkdir -p $SOURCE_DIR/private_environments
 cd $SOURCE_DIR/private_environments
+
+if [ -d "$1".env ]
+then
+    rm -rf "$1".env
+fi
+
 git clone "https://marzvrover:$GITHUB_TOKEN@github.com/marzvrover/$1.env.git"
+
+$SOURCE_DIR/private_environments/$1.env/script/bootstrap
