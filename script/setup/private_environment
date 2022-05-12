@@ -10,6 +10,6 @@ then
     rm -rf "$1".env
 fi
 
-git clone "https://marzvrover:$PRIVATE_ENV_ACCESS@github.com/marzvrover/$1.env.git"
+git clone "https://$GITHUB_USER:$PRIVATE_ENV_ACCESS@github.com/$GITHUB_USER/$1.env.git"
 
 $SOURCE_DIR/private_environments/$1.env/script/bootstrap
