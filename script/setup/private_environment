@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z $PRIVATE_ENV_ACCESS ]
+if [ -z "$PRIVATE_ENV_ACCESS" ]
 then
     echo "Cannot add $1.env because PRIVATE_ENV_ACCESS is not set"
     exit 1
