@@ -2,13 +2,6 @@
 
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
 
+$SOURCE_DIR/private_environments
+
 $SOURCE_DIR/setup/git
-
-private_environments=(
-    "github"
-)
-
-for private_environment in ${private_environments[@]}
-do
-  $SOURCE_DIR/setup/private_environment "$private_environment"
-done
