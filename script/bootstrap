@@ -1,8 +1,13 @@
 #!/bin/bash
 
+# Get the directory of the current script and cd into it.
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
-echo "export ENV_DEV='$SOURCE_DIR/..'" >> ~/.bashrc
+ENV_DEV="$SOURCE_DIR/.."
+echo "export ENV_DEV=$ENV_DEV" >> ~/.bashrc
+cd "$SOURCE_DIR"
 
-$SOURCE_DIR/private_environments 2>> error.log
+# setup private environments and log errors.
+private_environments 2>> "$ENV_DEV/error.log"
 
-$SOURCE_DIR/setup/git 2>> error.log
+# run through local environment setup and log errors.
+setup/git 2>> "$ENV_DEV/error.log"

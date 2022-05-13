@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# validate arguments
 if [ -z "$1" ]; then
   >&2 echo "$(date +%D) $(date +%T) ERROR dev.env.setup.private_environment Usage: $0 <environment>"
   exit 1
 fi
 
+# check environment variables
 ENV_ACCESS_TOKEN_NAME="ENV_${1^^}_ACCESS_TOKEN"
 
 if [ -z "${!ENV_ACCESS_TOKEN_NAME}" ]
@@ -25,6 +27,6 @@ fi
 
 git clone "https://$GITHUB_USER:${!ENV_ACCESS_TOKEN_NAME}@github.com/$GITHUB_USER/$1.env.git"
 
-$SOURCE_DIR/private_environments/$1.env/script/bootstrap
+"$1.env/script/bootstrap"
 
 echo "export ENV_${1^^}='$SOURCE_DIR/private_environments/$1.env'" >> ~/.bashrc

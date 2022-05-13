@@ -1,12 +1,15 @@
 #!/bin/bash
 
+# Get the directory of the current script and cd into it.
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
+cd $SOURCE_DIR
 
+# private environments to pull in
 private_environments=(
     "github"
 )
 
 for private_environment in ${private_environments[@]}
 do
-  $SOURCE_DIR/setup/private_environment "$private_environment"
+  setup/private_environment "$private_environment"
 done
