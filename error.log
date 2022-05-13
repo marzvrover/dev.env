@@ -1,6 +1,0 @@
-Cannot add github.env because ENV_GITHUB_ACCESS_TOKEN is not set
-Cannot add github.env because ENV_GITHUB_ACCESS_TOKEN is not set
-05/13/22 00:52:25 NOTICE Cannot add github.env because ENV_GITHUB_ACCESS_TOKEN is not set
-05/13/22 00:53:07 NOTICE Cannot add github.env because ENV_GITHUB_ACCESS_TOKEN is not set
-05/13/22 00:53:07 ERROR Usage: /workspaces/dev.env/script/setup/private_environment <environment>
-05/13/22 00:54:24 NOTICE dev.env.setup.private_environment Cannot add github.env because ENV_GITHUB_ACCESS_TOKEN is not set
