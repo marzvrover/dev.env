@@ -27,4 +27,4 @@ git clone "https://$GITHUB_USER:${!ENV_ACCESS_TOKEN_NAME}@github.com/$GITHUB_USE
 
 $SOURCE_DIR/private_environments/$1.env/script/bootstrap
 
-echo "export ${$1^^}_ENV='$SOURCE_DIR/private_environments/$1.env'" >> ~/.bashrc
+echo "export ENV_${$1^^}='$SOURCE_DIR/private_environments/$1.env'" >> ~/.bashrc
