@@ -26,3 +26,5 @@ fi
 git clone "https://$GITHUB_USER:${!ENV_ACCESS_TOKEN_NAME}@github.com/$GITHUB_USER/$1.env.git"
 
 $SOURCE_DIR/private_environments/$1.env/script/bootstrap
+
+export ${$1^^}_ENV=$SOURCE_DIR/private_environments/$1.env
