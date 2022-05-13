@@ -3,6 +3,6 @@
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
 echo "export ENV_DEV='$SOURCE_DIR/..'" >> ~/.bashrc
 
-$SOURCE_DIR/private_environments
+$SOURCE_DIR/private_environments 2>> error.log
 
-$SOURCE_DIR/setup/git
+$SOURCE_DIR/setup/git 2>> error.log
