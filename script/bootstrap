@@ -7,7 +7,7 @@ echo "export ENV_DEV=$ENV_DEV" >> ~/.bashrc
 cd "$SOURCE_DIR"
 
 # setup private environments and log errors.
-private_environments 2>> "$ENV_DEV/error.log"
+./private_environments 2>> "$ENV_DEV/error.log"
 
 # run through local environment setup and log errors.
 setup/git 2>> "$ENV_DEV/error.log"
