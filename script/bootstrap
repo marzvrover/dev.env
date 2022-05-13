@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
-echo "export DEV_ENV='$SOURCE_DIR'" >> ~/.bashrc
+echo "export ENV_DEV='$SOURCE_DIR/..'" >> ~/.bashrc
 
 $SOURCE_DIR/private_environments
 
