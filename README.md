@@ -3,7 +3,7 @@
 Developer environment setup.
 Designed first and foremost to be compatible as a Codespaces [dotfiles repo](https://docs.github.com/en/codespaces/customizing-your-codespace/personalizing-codespaces-for-your-account).
 
-Entrypoint: `script/boostrap`
+Entrypoint: `script/bootstrap`
 
 Private environment configurations can be added in `script/private_environments`:
 
