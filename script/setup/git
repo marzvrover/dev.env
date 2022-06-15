@@ -1,3 +1,4 @@
 #!/bin/bash
 
 git config --global commit.gpgsign true
+git config --global core.editor vim
