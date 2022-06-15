@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Check kernel name
+case "$(uname -s)" in
+  Linux*)
+    machine="Linux"
+    ;;
+  Darwin*)
+    # macOS, iOS, etc.
+    machine="Darwin"
+    ;;
+  *)
+    machine="Other"
+esac
+
+if [ "$machine" != "Linux" ]
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR $machine is not supported at this time"
+  exit 1
+fi
+
+if ! command -v apt &> /dev/null
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR only supports apt package manager at this time"
+  exit 1
+fi
+
+if [ ! -f "/etc/apt/sources.list.d/github-cli.list" ]
+then
+  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+fi
+
+# if command exists this is also how you update it
+sudo apt update
+sudo apt -y install gh
+
+if ! command -v gh &> /dev/null
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR gh failed to installed"
+  exit 1
+fi
+
+exit 0
