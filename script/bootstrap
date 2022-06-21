@@ -2,7 +2,7 @@
 
 # Get the directory of the current script and cd into it.
 SOURCE_DIR="$(dirname "$(realpath "$0")")"
-ENV_DEV="$SOURCE_DIR/.."
+export ENV_DEV="$SOURCE_DIR/.."
 echo "export ENV_DEV=$ENV_DEV" >> ~/.bashrc
 cd "$SOURCE_DIR"
 
