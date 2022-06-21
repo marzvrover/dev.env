@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mv $ENV_DEV/assets/dotfile/.vimrc $HOME/.vimrc

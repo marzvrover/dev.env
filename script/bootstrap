@@ -12,3 +12,4 @@ cd "$SOURCE_DIR"
 # run through local environment setup and log errors.
 setup/git 2>> "$ENV_DEV/error.log"
 setup/gh  2>> "$ENV_DEV/error.log"
+setup/dotfile ".vimrc" 2>> "$ENV_DEV/error.log"
