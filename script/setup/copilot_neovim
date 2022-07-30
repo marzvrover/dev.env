@@ -1,3 +1,11 @@
 #!/bin/bash
 
 git clone https://github.com/github/copilot.vim.git "$HOME/.config/nvim/pack/github/start/copilot.vim"
+
+nvim --headless +":Copilot setup" +qa
+
+if [ $? -ne 0 ]
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR copilot_neovim failed while running the setup command"
+  exit 1
+fi
