@@ -13,21 +13,48 @@ case "$(uname -s)" in
     machine="Other"
 esac
 
+# Check bit
+case "$(uname -i)" in
+  x86_64*)
+    bit="64"
+    ;;
+  i386*)
+    bit="32"
+    ;;
+  *)
+    bit="Other"
+esac
+
 if [ "$machine" != "Linux" ]
 then
   >&2 echo "$(date +%D) $(date +%T) ERROR $machine is not supported at this time"
   exit 1
 fi
 
-if ! command -v apt &> /dev/null
+if ! command -v dpkg &> /dev/null
 then
-  >&2 echo "$(date +%D) $(date +%T) ERROR only supports apt package manager at this time"
+  >&2 echo "$(date +%D) $(date +%T) ERROR only supports deb packages at this time"
   exit 1
 fi
 
-# if command exists this is also how you update it
-sudo apt update
-sudo apt -y install neovim
+if [ "$bit" != "64" ]
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR only supports 64-bit"
+  exit 1
+fi
+
+curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb --output /tmp/nvim-linux64.deb
+curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb.sha256sum --output /tmp/nvim-linux64.deb.sha256sum
+
+cd /tmp
+sha256sum -c nvim-linux64.deb.sha256sum
+if [ $? -ne 0 ]
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR sha256sum failed"
+  exit 1
+fi
+
+sudo apt -y install ./nvim-linux64.deb
 
 if ! command -v nvim &> /dev/null
 then
