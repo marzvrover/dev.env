@@ -10,6 +10,7 @@ cd "$SOURCE_DIR"
 ./private_environments 2>> "$ENV_DEV/error.log"
 
 # run through local environment setup and log errors.
-setup/git 2>> "$ENV_DEV/error.log"
-setup/gh  2>> "$ENV_DEV/error.log"
+setup/git              2>> "$ENV_DEV/error.log"
+setup/gh               2>> "$ENV_DEV/error.log"
+setup/neovim           2>> "$ENV_DEV/error.log"
 setup/dotfile ".vimrc" 2>> "$ENV_DEV/error.log"
