@@ -62,4 +62,20 @@ then
   exit 1
 fi
 
+if [ -f "$HOME/.vimrc" ]
+then
+  >&2 echo "$(date +%D) $(date +%T) INFO there is no $HOME/.vimrc file"
+else
+ echo "source $HOME/.vimrc" >> "$HOME/.config/init.vim"
+
+  if [ -f "$HOME/.config/init.vim" ]
+  then
+    >&2 echo "$(date +%D) $(date +%T) ERROR failed to create $HOME/.config/init.vim"
+    exit 1
+  elif ! grep -qE "source\s.+\.vimrc" "$HOME/.config/init.vim" 
+  then
+    >&2 echo "$(date +%D) $(date +%T) ERROR failed to add source $HOME/.vimrc to $HOME/.config/init.vim"
+  fi
+fi
+
 exit 0
