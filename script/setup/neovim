@@ -49,7 +49,7 @@ then
   exit 1
 fi
 
-if command -v nvim &> /dev/null
+if ! command -v nvim &> /dev/null
 then
   >&2 echo "$(date +%D) $(date +%T) INFO neovim is already installed"
 else
