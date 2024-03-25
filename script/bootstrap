@@ -6,10 +6,16 @@ export ENV_DEV="$SOURCE_DIR/.."
 echo "export ENV_DEV=$ENV_DEV" >> ~/.bashrc
 cd "$SOURCE_DIR"
 
+# If $ENV_DEV error.log exists, delete it.
+if [ -f "$ENV_DEV/error.log" ]; then
+  rm "$ENV_DEV/error.log"
+fi
+
 # setup private environments and log errors.
 ./private_environments 2>> "$ENV_DEV/error.log"
 
 # run through local environment setup and log errors.
+setup/brew             2>> "$ENV_DEV/error.log"
 setup/git              2>> "$ENV_DEV/error.log"
 setup/gh               2>> "$ENV_DEV/error.log"
 setup/neovim           2>> "$ENV_DEV/error.log"
