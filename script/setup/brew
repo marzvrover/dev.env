@@ -39,7 +39,7 @@ then
   echo "$(date +%D) $(date +%T) INFO attempting to add brew to path" >> error.log
   if [ "$machine" == "Linux" ]
   then
-    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/codespace/.bashrc
+    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   elif [ "$machine" == "Darwin" ]
   then
