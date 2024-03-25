@@ -32,3 +32,27 @@ then
 fi
 
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# if brew is not in the PATH, add it
+if ! command -v brew &> /dev/null
+then
+  echo "$(date +%D) $(date +%T) INFO attempting to add brew to path" >> error.log
+  if [ "$machine" == "Linux" ]
+  then
+    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/codespace/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [ "$machine" == "Darwin" ]
+  then
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshrc
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+fi
+
+# if brew is not in the PATH, it failed to install
+if ! command -v brew &> /dev/null
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR brew command failed to install"
+  exit 1
+fi
+
+exit 0

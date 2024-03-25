@@ -49,12 +49,17 @@ then
   exit 1
 fi
 
-brew install neovim
-
 if ! command -v nvim &> /dev/null
 then
-  >&2 echo "$(date +%D) $(date +%T) ERROR neovim failed to installed"
-  exit 1
+  >&2 echo "$(date +%D) $(date +%T) INFO neovim is already installed"
+else
+  brew install neovim
+
+  if ! command -v nvim &> /dev/null
+  then
+    >&2 echo "$(date +%D) $(date +%T) ERROR neovim failed to installed"
+    exit 1
+  fi
 fi
 
 if [ -f "$HOME/.vimrc" ]
