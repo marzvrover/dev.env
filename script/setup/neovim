@@ -25,7 +25,7 @@ case "$(uname -i)" in
     bit="Other"
 esac
 
-if [ "$machine" != "Linux" ]
+if [ "$machine" != "Linux" ] && [ "$machine" != "Darwin" ]
 then
   >&2 echo "$(date +%D) $(date +%T) ERROR $machine is not supported at this time"
   exit 1
@@ -43,18 +43,13 @@ then
   exit 1
 fi
 
-curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb --output /tmp/nvim-linux64.deb
-curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb.sha256sum --output /tmp/nvim-linux64.deb.sha256sum
-
-cd /tmp
-sha256sum -c nvim-linux64.deb.sha256sum
-if [ $? -ne 0 ]
+if ! command -v brew &> /dev/null
 then
-  >&2 echo "$(date +%D) $(date +%T) ERROR sha256sum failed"
+  >&2 echo "$(date +%D) $(date +%T) ERROR brew command not found"
   exit 1
 fi
 
-sudo apt -y install ./nvim-linux64.deb
+brew install neovim
 
 if ! command -v nvim &> /dev/null
 then
@@ -66,15 +61,16 @@ if [ -f "$HOME/.vimrc" ]
 then
   >&2 echo "$(date +%D) $(date +%T) INFO there is no $HOME/.vimrc file"
 else
- echo "source $HOME/.vimrc" >> "$HOME/.config/init.vim"
+  echo "source $HOME/.vimrc" >> "$HOME/.config/init.vim"
 
   if [ -f "$HOME/.config/init.vim" ]
   then
     >&2 echo "$(date +%D) $(date +%T) ERROR failed to create $HOME/.config/init.vim"
     exit 1
-  elif ! grep -qE "source\s.+\.vimrc" "$HOME/.config/init.vim" 
+  elif ! grep -qE "source\s.+\.vimrc" "$HOME/.config/init.vim"
   then
     >&2 echo "$(date +%D) $(date +%T) ERROR failed to add source $HOME/.vimrc to $HOME/.config/init.vim"
+    exit 1
   fi
 fi
 

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Check kernel name
+case "$(uname -s)" in
+  Linux*)
+    machine="Linux"
+    ;;
+  Darwin*)
+    # macOS, iOS, etc.
+    machine="Darwin"
+    ;;
+  *)
+    machine="Other"
+esac
+
+# Check bit
+case "$(uname -i)" in
+  x86_64*)
+    bit="64"
+    ;;
+  i386*)
+    bit="32"
+    ;;
+  *)
+    bit="Other"
+esac
+
+if [ "$machine" != "Linux" ] && [ "$machine" != "Darwin" ]
+then
+  >&2 echo "$(date +%D) $(date +%T) ERROR $machine is not supported at this time"
+  exit 1
+fi
+
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
