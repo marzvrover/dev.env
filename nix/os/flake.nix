@@ -34,9 +34,6 @@
       worldbringer-dev = lib.nixosSystem {
         system = editions.worldbringer-dev.system;
         modules = editions.worldbringer-dev.modules;
-        specialArgs = {
-          hostname = editions.worldbringer-dev.hostname;
-        };
       };
     };
   };

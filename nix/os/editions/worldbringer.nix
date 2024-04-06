@@ -1,11 +1,11 @@
-{ config, pkgs, hostname, ... }:
+{ config, pkgs, ... }:
 {
   # Bootloader.
   ## boot.loader.grub.device defined in host nix
   boot.loader.grub.enable = true;
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = (if (isNull(hostname)) then "worldbringer" else hostname); # Define your hostname.
+  networking.hostName = "worldbringer"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
