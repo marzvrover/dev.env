@@ -97,7 +97,45 @@
     git
   ];
 
-  virtualisation.docker.enable = true;
+  # container config
+  virtualisation.podman.enable = true;
+  virtualisation.oci-containers.containers = {
+    audiobookshelf = {
+      image = "ghcr.io/advplyr/audiobookshelf:latest";
+      ports = [ "81:80" ];
+      volumes = [
+        "/home/user/audiobookshelf/audiobooks:/audiobooks"
+        "/home/user/audiobookshelf/podcasts:/podcasts"
+        "/home/user/audiobookshelf/config:/config"
+        "/home/user/audiobookshelf/metadata:/metadata"
+      ];
+      environment = {
+        TZ = "UTC";
+      };
+    };
+    plex = {
+      image = "plexinc/pms-docker";
+      ports = [
+        "32400:32400"
+        "1900:1900/udp"
+        "82:8324"
+        "32410:32410/udp"
+        "32412:32412/udp"
+        "32413:32413/udp"
+        "32414:32414/udp"
+        "32469:32469"
+      ];
+      volumes = [
+        "/home/user/plex/config:/config"
+        "/home/user/plex/transcode:/transcode"
+        "/home/user/plex/data:/data"
+      ];
+      environment = {
+        TZ = "UTC";
+        PLEX_CLAIM = "";
+      };
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
