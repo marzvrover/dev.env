@@ -113,9 +113,9 @@
     plex = {
       image = "plexinc/pms-docker";
       ports = [
-        "32400:32400"
+        "82:32400"
         "1900:1900/udp"
-        "82:8324"
+        "8324:8324"
         "32410:32410/udp"
         "32412:32412/udp"
         "32413:32413/udp"
@@ -132,8 +132,27 @@
         PLEX_CLAIM = "";
       };
     };
+    cloudflare-ddns = {
+      image = "favonia/cloudflare-ddns:latest";
+      environment = {
+        CF_API_TOKEN = "";
+        DOMAINS = "";
+        PROXIED = "false";
+      };
+    };
+
   };
 
+  # OpenSSH
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      AllowUsers = [
+        "marzvrover"
+      ];
+    };
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
