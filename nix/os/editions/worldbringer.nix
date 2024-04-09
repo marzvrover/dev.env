@@ -1,10 +1,5 @@
 { config, pkgs, ... }:
 {
-  # Bootloader.
-  ## boot.loader.grub.device defined in host nix
-  boot.loader.grub.enable = true;
-  boot.loader.grub.useOSProber = true;
-
   networking.hostName = "worldbringer"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
@@ -70,9 +65,9 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.user = {
+  users.users.marzvrover = {
     isNormalUser = true;
-    description = "user";
+    description = "marzvrover";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
 
@@ -81,7 +76,7 @@
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "user";
+  services.xserver.displayManager.autoLogin.user = "marzvrover";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
@@ -95,6 +90,8 @@
   environment.systemPackages = with pkgs; [
     # REQUIRED FOR SYSTEM
     git
+    firefox
+    mdadm
   ];
 
   # container config
@@ -104,10 +101,10 @@
       image = "ghcr.io/advplyr/audiobookshelf:latest";
       ports = [ "81:80" ];
       volumes = [
-        "/home/user/audiobookshelf/audiobooks:/audiobooks"
-        "/home/user/audiobookshelf/podcasts:/podcasts"
-        "/home/user/audiobookshelf/config:/config"
-        "/home/user/audiobookshelf/metadata:/metadata"
+        "/data/audiobookshelf/audiobooks:/audiobooks"
+        "/data/audiobookshelf/podcasts:/podcasts"
+        "/data/audiobookshelf/config:/config"
+        "/data/audiobookshelf/metadata:/metadata"
       ];
       environment = {
         TZ = "UTC";
@@ -126,9 +123,9 @@
         "32469:32469"
       ];
       volumes = [
-        "/home/user/plex/config:/config"
-        "/home/user/plex/transcode:/transcode"
-        "/home/user/plex/data:/data"
+        "/data/plex/config:/config"
+        "/data/plex/transcode:/transcode"
+        "/data/plex/data:/data"
       ];
       environment = {
         TZ = "UTC";

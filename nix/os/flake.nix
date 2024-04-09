@@ -13,7 +13,7 @@
           system = "x86_64-linux";
           modules = [
             ./editions/worldbringer.nix
-            ./hosts/xen.nix
+            ./hosts/mac-mini-2012-wb.nix
           ];
           hostname = "worldbringer";
         };

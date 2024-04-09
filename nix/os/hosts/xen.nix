@@ -3,7 +3,10 @@
 {
   imports = [ ];
 
-
+  # Bootloader.
+  ## boot.loader.grub.device defined in host nix
+  boot.loader.grub.enable = true;
+  boot.loader.grub.useOSProber = true;
 
   boot.initrd.availableKernelModules = [ "ata_piix" "ehci_pci" "sr_mod" "xen_blkfront" ];
   boot.initrd.kernelModules = [ ];
