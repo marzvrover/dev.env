@@ -101,6 +101,17 @@
     mdadm
   ];
 
+  # SSL
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "";
+    certs."example.com" = {
+      dnsProvider = "cloudflare";
+      credentialsFile = "tokenFile";
+    };
+  };
+
   # container config
   virtualisation.podman.enable = true;
   virtualisation.oci-containers.containers = {
