@@ -59,5 +59,3 @@ fi
 
 source "$HOME/.zsh_copilot"
 source "$HOME/.aliases"
-
-[[ -s "/Users/marzvrover/.gvm/scripts/gvm" ]] && source "/Users/marzvrover/.gvm/scripts/gvm"
