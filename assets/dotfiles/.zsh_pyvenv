@@ -1,0 +1,14 @@
+pyvenv () {
+    if [ -z "$1" ]; then
+        echo "Usage: pyvenv owner/repo" >&2
+        return 1
+    elif [[ ! "$1" =~ ^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$ ]]; then
+        echo "Usage: pyvenv owner/repo" >&2
+        return 1
+    fi
+    if [ ! -d "$HOME/.pyenvs/$1" ]; then
+        mkdir -p "$HOME/.pyenvs/$1"
+        python -m venv "$HOME/.pyenvs/$1"
+    fi
+    source "$HOME/.pyenvs/$1/bin/activate"
+}

@@ -1,0 +1,59 @@
+# Expected to be in the .zshrc shell environment
+## Expected variables:
+## - MACHINE_KERNEL
+## - MACHINE_ARCH
+
+# gh
+alias cook="gh cs"
+alias sigma="gh pr"
+
+# git
+alias cooking="git checkout"
+alias pitstop="git stash"
+alias glowup="git gc --aggressive --prune=now"
+alias recharge="git pull"
+alias rizz="git commit"
+alias slay="git add"
+alias vibes="git status"
+alias yeet="git push"
+
+# ngrok
+alias peek="ngrok"
+
+# neovim
+alias whipup="nvim"
+
+# yes
+alias nocap="yes"
+
+# homebrew
+if [[ "$MACHINE_KERNEL" == "darwin" ]] && [[ "$MACHINE_ARCH" == "arm64" ]]; then
+  alias ibrew="arch -x86_64 /usr/local/bin/brew"
+  alias mbrew="/opt/homebrew/bin/brew"
+fi
+
+# clipboard
+if [[ "$MACHINE_KERNEL" == "darwin" ]]; then
+  alias lowerclip="pbpaste | tr '[:upper:]' '[:lower:]' | pbcopy"
+  alias upperclip="pbpaste | tr '[:lower:]' '[:upper:]' | pbcopy"
+fi
+
+# languagetool
+alias languagetoolcli="java -jar $HOME/Development/languagetool-org/languagetool/languagetool-standalone/target/LanguageTool-6.0-SNAPSHOT/LanguageTool-6.0-SNAPSHOT/languagetool-commandline.jar"
+alias languagetoolgui="java -jar $HOME/Development/languagetool-org/languagetool/languagetool-standalone/target/LanguageTool-6.0-SNAPSHOT/LanguageTool-6.0-SNAPSHOT/languagetool.jar"
+
+# deadssh
+alias lear="clear" # lear happens when I type clear into a dead ssh session
+alias xit="exit" # xit happens when I type exit into a dead ssh session
+
+# formatting
+alias prettyjson="ruby -e \"require 'json'; puts JSON.pretty_generate(JSON.parse(ARGF.read))\""
+
+# python
+alias python="python3"
+
+# netcat
+alias brb="nc towel.blinkenlights.nl 23 | lolcat"
+
+# age encrypt using 1password
+alias opagee="op item get knylbrklqvvpgxt7gfdibqkbjm --fields private_key --format json | jq .value -r | age -e -i -"
