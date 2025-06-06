@@ -6,6 +6,9 @@
 # starship
 eval "$(starship init zsh)"
 
+# autin
+eval "$(atuin init zsh --disable-up-arrow)"
+
 # zoxide
 eval "$(zoxide init zsh)"
 
